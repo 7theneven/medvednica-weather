@@ -1,3 +1,4 @@
+HEAD
 # Medvednica Hiking Paths Scraper
 
 This script scrapes hiking path information from the Medvednica.info blog and saves it to a CSV file.
@@ -47,3 +48,6 @@ The script includes error handling for:
 - Network connection issues
 - Invalid webpage structure
 - Data parsing errors 
+=======
+# medvednica-weather
+fc978d59715cc006adadb3d7c2b2300665c0f5e2
