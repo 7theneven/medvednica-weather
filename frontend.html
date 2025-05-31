@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hiking Weather App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+    
+    .modal-content {
+      position: relative;
+      background-color: #1f2937;
+      margin: 15% auto;
+      padding: 20px;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .close {
+      position: absolute;
+      right: 10px;
+      top: 5px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen font-sans">
+
+  <!-- Login Form -->
+  <div class="bg-gray-900 px-4 py-4 border-b border-gray-700">
+    <div class="container mx-auto max-w-lg">
+      <form id="loginForm" class="flex gap-4 items-center justify-center">
+        <div>
+          <input
+            type="text"
+            id="firstname"
+            name="firstname"
+            placeholder="First Name"
+            required
+            class="bg-gray-800 text-white px-3 py-2 rounded border border-gray-600 placeholder-gray-400 focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
+          />
+        </div>
+        <div>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            required
+            class="bg-gray-800 text-white px-3 py-2 rounded border border-gray-600 placeholder-gray-400 focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500"
+          />
+        </div>
+        <button
+          type="submit"
+          class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded shadow-md transition-colors duration-150"
+        >
+          Login
+        </button>
+      </form>
+      <div id="loginError" class="text-red-400 text-center mt-2 text-sm hidden"></div>
+    </div>
+  </div>
+
+  <!-- Modal for AI Recommendation -->
+  <div id="recommendationModal" class="modal">
+    <div class="modal-content">
+      <span class="close text-gray-400 hover:text-white">&times;</span>
+      <h2 class="text-xl font-semibold mb-4">AI Hiking Recommendation</h2>
+      <p id="recommendationText" class="text-gray-300 text-lg leading-relaxed"></p>
+      <div id="recommendationLoader" class="text-blue-400 mt-2 hidden">
+        Generating recommendation...
+      </div>
+    </div>
+  </div>
+
+  <!-- Header with Timestamps -->
+  <div class="bg-gray-800 px-4 py-3 mb-4">
+    <div class="flex justify-between items-center">
+      <h1 class="text-xl font-semibold">Hiking Forecast</h1>
+      <button
+        id="refresh-btn"
+        class="bg-blue-600 hover:bg-blue-500 text-white text-sm px-4 py-2 rounded shadow-md"
+        onclick="refreshData()"
+      >
+        Refresh
+      </button>
+    </div>
+    <div class="mt-2 text-sm text-gray-400" id="timestamps">
+      <!-- Timestamps will be inserted here -->
+    </div>
+  </div>
+
+  <!-- Trail List -->
+  <div id="trail-list" class="px-4 space-y-2">
+    <!-- Trails will be inserted here -->
+  </div>
+
+  <script>
+    // Login form handling
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const firstname = document.getElementById('firstname').value;
+      const email = document.getElementById('email').value;
+      const errorDiv = document.getElementById('loginError');
+      
+      try {
+        const response = await fetch('/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ firstname, email })
+        });
+        
+        if (response.ok) {
+          window.location.href = '/logged_in';
+        } else {
+          const data = await response.json();
+          errorDiv.textContent = data.error || 'Login failed. Please try again.';
+          errorDiv.classList.remove('hidden');
+        }
+      } catch (error) {
+        console.error('Error during login:', error);
+        errorDiv.textContent = 'An error occurred. Please try again.';
+        errorDiv.classList.remove('hidden');
+      }
+    });
+
+    // Format timestamp
+    function formatTimestamp(timestamp) {
+      if (!timestamp) return 'Not available';
+      const date = new Date(timestamp);
+      return date.toLocaleTimeString();
+    }
+
+    // Get weather icon based on condition
+    function getWeatherEmoji(condition, isDay) {
+      condition = condition.toLowerCase();
+      if (condition.includes('sun') || condition.includes('clear')) {
+        return isDay ? '☀️' : '🌙';  // Sun for day, moon for night
+      }
+      if (condition.includes('rain')) return '🌧️';
+      if (condition.includes('cloud')) return '☁️';
+      if (condition.includes('snow')) return '❄️';
+      if (condition.includes('thunder')) return '⛈️';
+      if (condition.includes('mist') || condition.includes('fog')) return '🌫️';
+      return '🌤️';  // default
+    }
+
+    // Format weather text
+    function formatWeather(weather) {
+      if (!weather) return 'Weather data unavailable';
+      const emoji = getWeatherEmoji(weather.text, weather.is_day === 1);
+      return {
+        condition: `${emoji} ${weather.text}`,
+        temp: `${weather.temp_c}°C (Feels like: ${weather.feelslike_c}°C)`,
+        wind: `${weather.wind_kph} km/h (Gusts: ${weather.gust_kph} km/h)`,
+        humidity: `${weather.humidity}%`,
+        uv: `UV: ${weather.uv}`,
+        visibility: `Visibility: ${weather.vis_km} km`
+      };
+    }
+
+    // Get color class based on weather
+    function getWeatherColorClass(weather) {
+      if (!weather) return 'text-gray-400';
+      
+      const condition = weather.text.toLowerCase();
+      if (condition.includes('sun') || condition.includes('clear')) return 'text-yellow-300';
+      if (condition.includes('rain')) return 'text-blue-300';
+      if (condition.includes('cloud')) return 'text-gray-300';
+      if (condition.includes('snow')) return 'text-blue-200';
+      if (condition.includes('thunder')) return 'text-purple-300';
+      return 'text-green-300';
+    }
+
+    // Handle Keep Track button click
+    function handleKeepTrack(trailNumber) {
+      const errorDiv = document.getElementById('loginError');
+      errorDiv.textContent = 'You need to log in first to get weather updates';
+      errorDiv.classList.remove('hidden');
+      setTimeout(() => {
+        errorDiv.classList.add('hidden');
+      }, 3000);
+    }
+
+    // Modal functionality
+    const modal = document.getElementById('recommendationModal');
+    const closeBtn = document.getElementsByClassName('close')[0];
+    const recommendationText = document.getElementById('recommendationText');
+    const recommendationLoader = document.getElementById('recommendationLoader');
+
+    closeBtn.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    // Get color for safety score
+    function getSafetyScoreColor(score) {
+      if (score >= 8) return 'text-green-400';
+      if (score >= 6) return 'text-yellow-400';
+      if (score >= 4) return 'text-orange-400';
+      return 'text-red-400';
+    }
+
+    // Format safety score
+    function formatSafetyScore(text) {
+      // First try to match the score with bold markers
+      let scoreMatch = text.match(/\*\*Safety Score: \[(\d+\.\d+)\/10\.0\]\*\*/);
+      
+      // If no match with bold markers, try without them
+      if (!scoreMatch) {
+        scoreMatch = text.match(/Safety Score: \[(\d+\.\d+)\/10\.0\]/);
+      }
+      
+      if (!scoreMatch) return { score: null, recommendation: text };
+
+      const score = parseFloat(scoreMatch[1]);
+      
+      // Look for recommendation text after the score
+      const parts = text.split(/Recommendation:/i);
+      const recommendation = parts.length > 1 ? parts[1].trim() : '';
+      
+      const colorClass = getSafetyScoreColor(score);
+
+      return {
+        scoreHtml: `
+          <div class="flex flex-col border-b border-gray-700 pb-4 mb-4">
+            <div class="flex items-baseline gap-2">
+              <span class="text-gray-400 text-lg">Safety Score:</span>
+              <span class="${colorClass} text-3xl font-bold">${score.toFixed(1)}</span>
+              <span class="text-gray-400 text-lg">/10.0</span>
+            </div>
+          </div>
+        `,
+        recommendation: recommendation
+      };
+    }
+
+    // Get AI recommendation
+    async function getRecommendation(lat, lon) {
+      modal.style.display = "block";
+      const recommendationText = document.getElementById('recommendationText');
+      const recommendationLoader = document.getElementById('recommendationLoader');
+      
+      recommendationText.textContent = "";
+      recommendationLoader.classList.remove('hidden');
+      
+      try {
+        const response = await fetch(`/api/recommendation/${lat}/${lon}`);
+        const data = await response.json();
+        
+        if (response.ok) {
+          recommendationText.textContent = data.recommendation;
+        } else {
+          recommendationText.textContent = "Sorry, couldn't generate a recommendation at this time.";
+        }
+      } catch (error) {
+        recommendationText.textContent = "Error fetching recommendation. Please try again.";
+      } finally {
+        recommendationLoader.classList.add('hidden');
+      }
+    }
+
+    // Create HTML for a trail
+    function createTrailHTML(trail) {
+      const weather = formatWeather(trail.weather);
+      const colorClass = getWeatherColorClass(trail.weather);
+      
+      return `
+        <div class="bg-gray-800 rounded px-4 py-3 text-sm hover:bg-gray-700 transition-colors">
+          <div class="flex items-center">
+            <!-- Trail Info -->
+            <div class="flex-1 grid grid-cols-[2fr,1fr,1fr,1fr,1fr] gap-4 items-center">
+              <div>
+                <div class="font-medium">${trail.number}. ${trail.name}</div>
+              </div>
+              
+              <!-- Weather Data -->
+              <div class="${colorClass}">
+                ${weather.condition}
+              </div>
+              <div class="text-gray-300">
+                <span class="text-gray-500">Temp:</span> ${weather.temp}
+              </div>
+              <div class="text-gray-300">
+                <span class="text-gray-500">Wind:</span> ${weather.wind}
+              </div>
+              <div class="text-gray-300">
+                <span class="text-gray-500">Humidity:</span> ${weather.humidity}
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="ml-4 space-x-2 flex">
+              <button
+                onclick="handleKeepTrack(${trail.number})"
+                class="bg-green-600 hover:bg-green-500 text-white text-xs px-3 py-1 rounded"
+              >
+                Keep Track
+              </button>
+              <button
+                onclick="getRecommendation(${trail.latitude}, ${trail.longitude})"
+                class="bg-blue-600 hover:bg-blue-500 text-white text-xs px-3 py-1 rounded"
+              >
+                Get AI Advice
+              </button>
+            </div>
+          </div>
+
+          <!-- Additional Weather Info -->
+          <div class="mt-3 text-xs text-gray-300">
+            <span class="text-gray-500">UV:</span> ${weather.uv} |
+            <span class="text-gray-500">Visibility:</span> ${weather.visibility}
+          </div>
+        </div>
+      `;
+    }
+
+    // Update timestamps
+    function updateTimestamps(trails) {
+      if (!trails || !trails.length || !trails[0].weather) {
+        document.getElementById('timestamps').innerHTML = 'No weather data available';
+        return;
+      }
+
+      const weather = trails[0].weather;
+      
+      document.getElementById('timestamps').innerHTML = `
+        <div class="flex space-x-4">
+          <span>🌡️ General weather data updated: ${formatTimestamp(weather.weather_updated)}</span>
+          <span>💨 Wind data updated: ${formatTimestamp(weather.wind_updated)}</span>
+        </div>
+      `;
+    }
+
+    // Fetch and display trails data
+    async function fetchTrails() {
+      try {
+        const response = await fetch('/api/trails');
+        if (!response.ok) throw new Error('Failed to fetch trails');
+        
+        const trails = await response.json();
+        
+        // Update timestamps first
+        updateTimestamps(trails);
+        
+        // Then update trail list
+        const trailListHTML = trails
+          .map(trail => createTrailHTML(trail))
+          .join('');
+        
+        document.getElementById('trail-list').innerHTML = trailListHTML;
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('trail-list').innerHTML = `
+          <div class="text-red-500 p-4">
+            Error loading trail data. Please try again later.
+          </div>
+        `;
+      }
+    }
+
+    // Refresh data
+    async function refreshData() {
+      const btn = document.getElementById('refresh-btn');
+      btn.disabled = true;
+      btn.classList.add('opacity-50');
+      
+      try {
+        await fetchTrails();
+      } finally {
+        btn.disabled = false;
+        btn.classList.remove('opacity-50');
+      }
+    }
+
+    // Initial load
+    document.addEventListener('DOMContentLoaded', fetchTrails);
+  </script>
+
+</body>
+</html>

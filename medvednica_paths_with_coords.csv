@@ -1,0 +1,73 @@
+number,name,distance,duration_mins,url,latitude,longitude
+1,Glavna staza na Medvednici,50 km,1830,http://www.medvednica.info/2010/10/planinarska-staza-1.html,45.878537,15.964508
+2,Kostanjek (Stenjevec) - Pl. staza 1,"2,7 km",50,http://www.medvednica.info/2010/10/planinarska-staza-2.html,45.838667,15.865202
+3,"Gornji Stenjevec - PD ""Glavica""","3,0 km",100,http://www.medvednica.info/2010/10/planinarska-staza-3.html,45.838188,15.873442
+4,"Gornje Vrapče - Slap ""Sopot""","6,5 km",200,http://www.medvednica.info/2010/10/planinarska-staza-4.html,45.856662,15.896358
+5,"Gornje Vrapče - PK ""Kameni svati""","6,0 km",230,http://www.medvednica.info/2010/10/planinarska-staza-5.html,45.847815,15.88932
+6,"Gornje Vrapče - PK ""Kameni svati""","5,2 km",140,http://www.medvednica.info/2010/10/planinarska-staza-6.html,45.847815,15.88932
+7,"Jablanovec - PK ""Kameni svati""","5,5 km",200,http://www.medvednica.info/2010/10/planinarska-staza-7.html,45.867421,15.855331
+8,"Livade ""Ponikve"" - PD ""Grafičar""","7,8 km",220,http://www.medvednica.info/2010/10/planinarska-staza-8.html,45.874115,15.901337
+9,"Mikulići - PD ""Risnjak""","3,8 km",130,http://www.medvednica.info/2010/10/planinarska-staza-9.html,45.863835,15.928459
+10,Gornje Vrapče - Pl. staza 9,"4,6 km",140,http://www.medvednica.info/2010/10/planinarska-staza-10.html,45.856065,15.922794
+11,"Šestine - PD ""Risnjak""/Sljeme","2,7 km",100,http://www.medvednica.info/2010/10/planinarska-staza-11.html,45.856065,15.922794
+12,"Šestine - PD ""Risnjak""/Sljeme","6,6 km",230,http://www.medvednica.info/2010/10/planinarska-staza-12.html,45.876983,15.94614
+13,Šestine - Kraljičin zdenac,"3,4 km",110,http://www.medvednica.info/2010/10/planinarska-staza-13.html,45.877342,15.953007
+14,Gračansko Dolje - Sljeme,"6,4 km",220,http://www.medvednica.info/2010/10/planinarska-staza-14.html,45.880807,15.965538
+15,Gračansko Dolje - Sljeme,"2,9 km",120,http://www.medvednica.info/2010/10/planinarska-staza-15.html,45.880807,15.965538
+16,Sljemenska cesta - Pl. staza 22,"5,3 km",130,http://www.medvednica.info/2010/10/planinarska-staza-16.html,45.89646,15.974636
+17,Gračansko Dolje - Pl. staza 14 i 19,"1,5 km",30,http://www.medvednica.info/2010/10/planinarska-staza-17.html,45.866824,15.979271
+18,"Gračansko Dolje - PD ""Puntijarka""","5,9 km",220,http://www.medvednica.info/2010/10/planinarska-staza-18.html,45.884512,15.975666
+19,"Gračansko Dolje - PD ""Puntijarka""","5,6 km",210,http://www.medvednica.info/2010/10/planinarska-staza-19.html,45.884512,15.975666
+20,Markuševec - Hunjka/Puntijarka,"6,6 km",230,http://www.medvednica.info/2010/10/planinarska-staza-20.html,45.895265,15.984249
+21,Markuševec - Hunjka/Puntijarka,"2,7 km",100,http://www.medvednica.info/2010/10/planinarska-staza-21.html,45.895265,15.984249
+22,"Markuševec - PD ""Hunjka""","6,5 km",230,http://www.medvednica.info/2010/10/planinarska-staza-22.html,45.896221,15.990257
+23,"Markuševečka Trnava - PD ""Hunjka""","8,0 km",230,http://www.medvednica.info/2010/10/planinarska-staza-23.html,45.903508,16.003475
+24,"Bidrovec - PD ""Gorščica""","4,4 km",140,http://www.medvednica.info/2010/10/planinarska-staza-24.html,45.914855,16.032658
+25,"Bidrovec - PD ""Gorščica""","5,1 km",200,http://www.medvednica.info/2010/10/planinarska-staza-25.html,45.914855,16.032658
+26,Pl. staza po vrhu Medvednice,"5,2 km",140,http://www.medvednica.info/2010/10/planinarska-staza-26.html,45.90303,15.953865
+27,Bidrovec - Ročićeva sjenokoša,"5,5 km",210,http://www.medvednica.info/2010/10/planinarska-staza-27.html,45.918438,16.048965
+28,Čučerje - Stubički Laz,"8,2 km",240,http://www.medvednica.info/2010/10/planinarska-staza-28.html,45.936109,16.093941
+29,"Hukmani - PD ""Lipa""","5,2 km",200,http://www.medvednica.info/2010/10/planinarska-staza-29.html,45.920468,16.053944
+30,"Čučerje - Pl. staza 1/PD ""Lipa""","3,6 km",130,http://www.medvednica.info/2010/10/planinarska-staza-30.html,45.907569,16.073856
+31,"Planina Donja - PD ""Lipa""","2,4 km",110,http://www.medvednica.info/2010/10/planinarska-staza-31.html,45.933244,16.077976
+32,"Planina Donja - V. Peć - PD ""Lipa""","2,3 km",130,http://www.medvednica.info/2010/10/planinarska-staza-32.html,45.933244,16.077976
+33,Stubičke Laz - Ročićeva sjenokoša,"6,3 km",220,http://www.medvednica.info/2010/10/planinarska-staza-33.html,45.949359,16.076088
+34,Gornja Stubica - Ročićeva sjenokoša,"7,6 km",300,http://www.medvednica.info/2010/10/planinarska-staza-34.html,45.960936,16.028023
+35,"Gornja Stubica - PD ""Gorščica""","8,6 km",300,http://www.medvednica.info/2010/10/planinarska-staza-35.html,45.954253,16.026649
+36,Pl. staza 18 - Strma peć,"1,5 km",40,http://www.medvednica.info/2010/10/planinarska-staza-36.html,45.881225,15.982189
+37,"Donja Stubica - PK ""Kulmerica""","6,1 km",220,http://www.medvednica.info/2010/10/planinarska-staza-37.html,45.938736,15.985966
+38,"Stubičke Toplice - PK ""Kulmerica""","9,3 km",330,http://www.medvednica.info/2010/10/planinarska-staza-38.html,45.947092,15.968285
+39,Stubičke Toplice - Sljeme,11 km,340,http://www.medvednica.info/2010/10/planinarska-staza-39.html,45.938736,15.970001
+40,Tomislavac - Horvatove stube,"4,5 km",200,http://www.medvednica.info/2010/10/planinarska-staza-40.html,45.938736,15.970001
+41,"Hunjka - Oštrica - PD ""Grafičar""","9,2 km",240,http://www.medvednica.info/2010/10/planinarska-staza-41.html,45.938736,15.970001
+42,Gornja Bistra - Činovnička livada,"5,9 km",230,http://www.medvednica.info/2010/10/planinarska-staza-42.html,45.907808,15.927086
+43,"Donja Pila - PD ""Hunjka""","3,5 km",120,http://www.medvednica.info/2010/10/planinarska-staza-43.html,45.932289,15.95747
+44,"Činovnička livada - PD ""Hunjka""","2,4 km",110,http://www.medvednica.info/2010/10/planinarska-staza-44.html,45.908764,15.962791
+45,okružuje Francuske rudnike,"1,3 km",100,http://www.medvednica.info/2010/10/planinarska-staza-45.html,45.904046,15.938759
+46,"Gornja Bistra - PD ""Grafičar""","7,0 km",230,http://www.medvednica.info/2010/10/planinarska-staza-46.html,45.90088,15.917988
+47,Sv. Ivan Zelina - Laz Stubički,15 km,400,http://www.medvednica.info/2010/10/planinarska-staza-47.html,45.966902,16.161575
+48,Kraljičin zdenac - Brestovac,"2,2 km",40,http://www.medvednica.info/2010/10/planinarska-staza-48.html,45.876505,15.958843
+49,Kraljev Vrh - Činovnička livada,"7,3 km",240,http://www.medvednica.info/2010/10/planinarska-staza-49.html,45.91999,15.936699
+50,"Lukšići - PD ""Grafičar""","4,3 km",130,http://www.medvednica.info/2010/10/planinarska-staza-50.html,45.871246,15.936699
+51,Markov travnik - Pl. staza 39,"0,8 km",30,http://www.medvednica.info/2010/10/planinarska-staza-51.html,45.911272,15.962791
+52,Šestine - TV-toranj,"6,0 km",230,http://www.medvednica.info/2010/10/planinarska-staza-52.html,45.877461,15.962276
+53,Hukmani - Pl. staza 1,"2,3 km",100,http://www.medvednica.info/2010/10/planinarska-staza-53.html,45.917602,16.072483
+54,"Gornje Vrapče - PD ""Risnjak""","4,2 km",140,http://www.medvednica.info/2010/10/planinarska-staza-54.html,45.856782,15.914555
+55,Gračani - Sanatorij Brestovac,"5,4 km",230,http://www.medvednica.info/2010/10/planinarska-staza-55.html,45.877342,15.96571
+56,"Bidrovec/Vidovec - PD ""Gorščica""","2,5 km",200,http://www.medvednica.info/2010/10/planinarska-staza-56.html,45.915094,16.032829
+57,Gračani - Činovnička livada,"6,1 km",230,http://www.medvednica.info/2010/10/planinarska-staza-57.html,45.877461,15.96159
+58,Sesvete - Pl. staza 30/Pl. staza 1,10 km,320,http://www.medvednica.info/2010/10/planinarska-staza-58.html,45.890964,16.077118
+59,Dotrščina - Markuševec,"4,0 km",120,http://www.medvednica.info/2010/10/planinarska-staza-59.html,45.890964,16.077118
+60,"Blaguša - PD ""Grohot""","3,4 km",120,http://www.medvednica.info/2010/10/planinarska-staza-60.html,45.943272,16.122437
+61,"Blaguša - PD ""Grohot""","3,5 km",120,http://www.medvednica.info/2010/10/planinarska-staza-61.html,45.943272,16.122437
+62,"Marija Bistrica - PD ""Grohot""","6,0 km",220,http://www.medvednica.info/2010/10/planinarska-staza-62.html,45.971197,16.145782
+63,Marija Bistrica - Tepčina špica,11 km,320,http://www.medvednica.info/2010/10/planinarska-staza-63.html,45.976446,16.086388
+64,"Kašina - PK ""Grohot""","3,3 km",120,http://www.medvednica.info/2010/10/planinarska-staza-64.html,45.952343,16.113682
+65,Marija Bistrica - Laz Stubički,"5,7 km",220,http://www.medvednica.info/2010/10/planinarska-staza-65.html,45.988136,16.10733
+66,Marija Bistrica - Laz Stubički,"4,5 km",120,http://www.medvednica.info/2010/10/planinarska-staza-66.html,45.988136,16.10733
+67,Marija Bistrica - Pl. staza 47,"6,4 km",230,http://www.medvednica.info/2010/10/planinarska-staza-67.html,45.987659,16.173935
+68,Preporlno - Pl. staza 47,"5,3 km",200,http://www.medvednica.info/2010/10/planinarska-staza-68.html,45.987659,16.173935
+69,Markuševec - Hunjka,"7,0 km",230,http://www.medvednica.info/2010/10/planinarska-staza-69.html,45.895743,15.995922
+70,Markuševec - Pl. staza 69,"2,7 km",50,http://www.medvednica.info/2010/10/planinarska-staza-70.html,45.89419,15.999355
+71,Pl. sklonište Danjka - Pl. staza 69,"1,6 km",30,http://www.medvednica.info/2010/10/planinarska-staza-71.html,45.908525,15.977898
+72,Moravče - Pl. staza 47,"5,2 km",210,http://www.medvednica.info/2010/10/planinarska-staza-72.html,45.95473,16.16209
