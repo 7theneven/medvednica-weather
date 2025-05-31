@@ -1,53 +1,97 @@
-HEAD
-# Medvednica Hiking Paths Scraper
+# Medvednica Path Weather Tracker
 
-This script scrapes hiking path information from the Medvednica.info blog and saves it to a CSV file.
+A comprehensive web application that tracks weather conditions for hiking paths on Medvednica mountain, providing real-time weather updates and AI-powered hiking recommendations.
 
 ## Features
 
-- Scrapes all hiking paths from http://www.medvednica.info/p/planinarske-staze.html
-- Extracts path number, name, distance, duration, and URL
-- Saves data to a CSV file
+### Weather Tracking
+- Real-time weather monitoring for all hiking paths on Medvednica
+- Weather data updates every 15 minutes via WeatherAPI
+- Detailed weather information including:
+  - Temperature and feels-like temperature
+  - Wind speed and direction
+  - Precipitation
+  - Humidity
+  - UV index
+  - Visibility
+  - Cloud cover
+  - Snow conditions
 
-## Requirements
+### AI-Powered Recommendations
+- Smart hiking recommendations based on current weather conditions
+- Considers multiple factors including:
+  - Time of day
+  - Safety conditions
+  - Visibility
+  - Extreme weather warnings
+  - Hiker comfort and safety
 
-- Python 3.7+
-- Required packages listed in `requirements.txt`
+### User Management
+- Secure login system
+- User profile management
+- Path tracking functionality
+- Personalized weather updates
+
+### Path Tracking System
+- Users can track specific paths
+- Tracked paths are saved in Airtable database
+- Background script checks for significant weather changes every 30 minutes
+- Automated email notifications for tracked paths when significant weather changes occur
+
+## Technical Stack
+
+- **Backend**: Flask (Python)
+- **Weather API**: WeatherAPI.com
+- **AI Integration**: Groq API
+- **Database**: Airtable
+- **Authentication**: Flask-Session
+
+## Environment Variables
+
+The application requires the following environment variables to be set in a `.env` file:
+
+```
+WEATHERAPI_KEY=your_weather_api_key
+GROQ_API_KEY=your_groq_api_key
+AIRTABLE_TOKEN=your_airtable_token
+AIRTABLE_BASE_ID=your_airtable_base_id
+AIRTABLE_TABLE_NAME=your_airtable_table_name
+```
 
 ## Installation
 
-1. Clone this repository or download the files
-2. Install the required packages:
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/medvednica-scraper.git
+cd medvednica-scraper
+```
 
+2. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-## Usage
+3. Set up environment variables:
+- Create a `.env` file in the root directory
+- Add the required environment variables as listed above
 
-Simply run the script:
-
+4. Run the application:
 ```bash
-python scrape_medvednica.py
+python app.py
 ```
 
-The script will create a file named `medvednica_paths.csv` containing all the hiking path data.
+## Usage
 
-## Output Format
+1. Access the web interface at `http://localhost:5000`
+2. Log in with your credentials
+3. Browse available paths and their current weather conditions
+4. Track specific paths to receive weather updates
+5. View AI-powered recommendations for each path
 
-The CSV file will contain the following columns:
-- number: Path number
-- name: Path name
-- distance: Distance in kilometers
-- duration_mins: Duration in minutes
-- url: URL to the detailed path description
+## Contributing
 
-## Error Handling
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-The script includes error handling for:
-- Network connection issues
-- Invalid webpage structure
-- Data parsing errors 
-=======
-# medvednica-weather
-fc978d59715cc006adadb3d7c2b2300665c0f5e2
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
